@@ -231,7 +231,7 @@ if (
 	store.getState().board.lists.length === 0
 ) {
 	console.log("SEED");
-	seed(store);
+	//seed(store);
 }
 
 export default rootReducer;

@@ -1,11 +1,18 @@
 import React, { useRef, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-function ListEditor() {
+function ListEditor({
+	list,
+	title,
+	handleChangeTitle,
+	onClickOutside,
+	saveList,
+	deleteList,
+}) {
 	const ref = useRef(null);
 	const onEnter = (e) => {
 		if (e.keyCode === 13) {
 			e.preventDefault();
-			this.props.saveList();
+			saveList();
 		}
 	};
 
@@ -23,7 +30,7 @@ function ListEditor() {
 			return;
 		}
 
-		this.props.onClickOutside();
+		onClickOutside();
 	};
 	return (
 		<div className="List-Title-Edit" ref={ref}>
@@ -34,9 +41,9 @@ function ListEditor() {
 				value={title}
 				onChange={handleChangeTitle}
 				onKeyDown={onEnter}
-				style={{ width: deleteList ? 220 : 245 }}
+				style={{ width: deleteList !== undefined ? 220 : 245 }}
 			/>
-			{deleteList && <ion-icon name="trash" onClick={deleteList} />}
+			{deleteList && <span onClick={deleteList}>Del</span>}
 		</div>
 	);
 }

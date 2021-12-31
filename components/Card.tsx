@@ -1,32 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import * as actions from "../store/actions";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-function Card() {
-	const startEditing = () =>
-		this.setState({
-			hover: false,
-			editing: true,
-			text: this.props.card.text,
-		});
+import { useSelector, useDispatch } from "react-redux";
+import CardEditor from "./CardEditor";
+function Card(props) {
+	const dispatch = useDispatch();
+	const { cardsById } = useSelector((state: any) => state);
+	const { cardId, index, listId } = props;
+	const card = cardsById[props.cardId];
+	const [hover, setHover] = useState(false);
+	const [editing, setEditing] = useState(false);
+	const [text, setText] = useState("");
+	const startEditing = () => {
+		setEditing(true);
+		setText(props.text);
+		setHover(false);
+	};
 
-	const endEditing = () => this.setState({ hover: false, editing: false });
+	const endEditing = () => {
+		setEditing(false);
+		setHover(false);
+	};
+
+	const startHover = () => setHover(true);
+	const endHover = () => setHover(false);
 
 	const editCard = async (text) => {
-		const { card, dispatch } = this.props;
-
-		this.endEditing();
+		endEditing();
 
 		dispatch({
-			type: "CHANGE_CARD_TEXT",
+			type: actions.changeCardText,
 			payload: { cardId: card._id, cardText: text },
 		});
 	};
 
 	const deleteCard = async () => {
-		const { listId, card, dispatch } = this.props;
-
 		if (window.confirm("Are you sure to delete this card?")) {
 			dispatch({
-				type: "DELETE_CARD",
+				type: actions.deleteCard,
 				payload: { cardId: card._id, listId },
 			});
 		}
@@ -40,16 +51,16 @@ function Card() {
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}
 						className="Card"
-						onMouseEnter={this.startHover}
-						onMouseLeave={this.endHover}
+						onMouseEnter={startHover}
+						onMouseLeave={endHover}
 					>
 						{hover && (
 							<div className="Card-Icons">
 								<div
 									className="Card-Icon"
-									onClick={this.startEditing}
+									onClick={startEditing}
 								>
-									<ion-icon name="create" />
+									+
 								</div>
 							</div>
 						)}
@@ -61,12 +72,14 @@ function Card() {
 		);
 	} else {
 		return (
-			<CardEditor
-				text={card.text}
-				onSave={this.editCard}
-				onDelete={this.deleteCard}
-				onCancel={this.endEditing}
-			/>
+			<>
+				<CardEditor
+					text={card.text}
+					onSave={editCard}
+					onDelete={deleteCard}
+					onCancel={endEditing}
+				/>
+			</>
 		);
 	}
 }

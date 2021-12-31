@@ -5,6 +5,11 @@ import "bootstrap/dist/css/bootstrap.css";
 // import '../styles/tailwind.css'
 import "../styles/Board.css";
 import "../styles/List.css";
+import "../styles/Card.css";
+import "../styles/AddList.css";
+import "../styles/ListEditor.css";
+import "../styles/EditButtons.css";
+import "../styles/CardEditor.css";
 
 function MyApp({ Component, pageProps }) {
 	useEffect(() => {

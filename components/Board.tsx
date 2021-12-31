@@ -25,15 +25,38 @@ function Board(props) {
 		if (!destination) {
 			return;
 		}
-	};
 
-	useEffect(() => {
-		dispatch({
-			type: actions.addList,
-			payload: { listId: firstListId, listTitle: "First list" },
-		});
-		// addListAction({ listId: firstListId, listTitle: "First list" });
-	}, []);
+		// Move list
+		if (type === "COLUMN") {
+			// Prevent update if nothing has changed
+			if (source.index !== destination.index) {
+				dispatch({
+					type: actions.moveList,
+					payload: {
+						oldListIndex: source.index,
+						newListIndex: destination.index,
+					},
+				});
+			}
+			return;
+		}
+
+		// Move card
+		if (
+			source.index !== destination.index ||
+			source.droppableId !== destination.droppableId
+		) {
+			dispatch({
+				type: actions.moveCard,
+				payload: {
+					sourceListId: source.droppableId,
+					destListId: destination.droppableId,
+					oldCardIndex: source.index,
+					newCardIndex: destination.index,
+				},
+			});
+		}
+	};
 
 	useEffect(() => {
 		console.log("board", board, cardsById, listsById);
@@ -58,20 +81,18 @@ function Board(props) {
 
 						{provided.placeholder}
 
-						{/* <div className="Add-List">
+						<div className="Add-List">
 							{addingList ? (
-								<AddList
-									toggleAddingList={this.toggleAddingList}
-								/>
+								<AddList toggleAddingList={toggleAddingList} />
 							) : (
 								<div
-									onClick={this.toggleAddingList}
+									onClick={toggleAddingList}
 									className="Add-List-Button"
 								>
-									<ion-icon name="add" /> Add a list
+									+ Add a list
 								</div>
 							)}
-						</div> */}
+						</div>
 					</div>
 				)}
 			</Droppable>

@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import EditButtons from "./EditButtons";
-function CardEditor() {
-	const handleChangeText = (event) =>
-		this.setState({ text: event.target.value });
+function CardEditor(props) {
+	const { text, onSave, onDelete, onCancel, adding } = props;
+	const [textState, setTextState] = useState(text);
+	const handleChangeText = (event) => setTextState(event.target.value);
 
 	const onEnter = (e) => {
-		const { text } = this.state;
-
 		if (e.keyCode === 13) {
 			e.preventDefault();
-			this.props.onSave(text);
+			onSave(textState);
 		}
 	};
 	return (
@@ -20,13 +19,13 @@ function CardEditor() {
 					autoFocus
 					className="Edit-Card-Textarea"
 					placeholder="Enter the text for this card..."
-					value={text}
-					onChange={this.handleChangeText}
-					onKeyDown={this.onEnter}
+					value={textState}
+					onChange={handleChangeText}
+					onKeyDown={onEnter}
 				/>
 			</div>
 			<EditButtons
-				handleSave={() => onSave(text)}
+				handleSave={() => onSave(textState)}
 				saveLabel={adding ? "Add card" : "Save"}
 				handleDelete={onDelete}
 				handleCancel={onCancel}

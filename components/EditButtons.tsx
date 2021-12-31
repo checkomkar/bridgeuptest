@@ -26,7 +26,7 @@ function EditButtons({ handleSave, saveLabel, handleDelete, handleCancel }) {
 				className="Edit-Button-Cancel"
 				onClick={handleCancel}
 			>
-				<ion-icon name="close" />
+				&times;
 			</div>
 		</div>
 	);

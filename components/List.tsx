@@ -44,6 +44,18 @@ export default function List(props) {
 			});
 		}
 	};
+
+	const addCard = async (cardText) => {
+		toggleAddingCard();
+
+		const cardId = shortid.generate();
+
+		dispatch({
+			type: actions.addCard,
+			payload: { cardText, cardId, listId },
+		});
+	};
+
 	return (
 		<Draggable draggableId={list._id} index={index}>
 			{(provided, snapshot) => (
@@ -71,7 +83,7 @@ export default function List(props) {
 						</div>
 					)}
 
-					{/* <Droppable droppableId={list._id}>
+					<Droppable droppableId={list._id}>
 						{(provided, _snapshot) => (
 							<div
 								ref={provided.innerRef}
@@ -91,21 +103,21 @@ export default function List(props) {
 
 								{addingCard ? (
 									<CardEditor
-										onSave={this.addCard}
-										onCancel={this.toggleAddingCard}
+										onSave={addCard}
+										onCancel={toggleAddingCard}
 										adding
 									/>
 								) : (
 									<div
 										className="Toggle-Add-Card"
-										onClick={this.toggleAddingCard}
+										onClick={toggleAddingCard}
 									>
-										<ion-icon name="add" /> Add a card
+										+ Add a card
 									</div>
 								)}
 							</div>
 						)}
-					</Droppable> */}
+					</Droppable>
 				</div>
 			)}
 		</Draggable>
