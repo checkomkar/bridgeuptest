@@ -1,0 +1,80 @@
+.nav-bar {
+	background-color: #026aa7;
+	box-sizing: border-box;
+	display: flex;
+	max-height: 40px;
+	overflow: hidden;
+	padding: 4px 4px;
+	.menu-item {
+		color: white;
+		font-weight: bold;
+		font-size: 14px;
+		padding: 0px 10px;
+		padding-top: 5px;
+		a {
+			color: white;
+			text-decoration: none;
+			background: 0 0;
+			border-radius: 3px;
+			font-weight: bold;
+			height: 15px;
+			line-height: 15px;
+			margin: 0 4px 5px 0;
+			padding: 8px;
+			text-align: center;
+			cursor: pointer;
+			&:hover {
+				background-color: rgba(255, 255, 255, 0.2);
+				color: #ffffff;
+				outline: 0;
+			}
+		}
+	}
+	.logo {
+		text-align: center;
+		opacity: 0.5;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+		img {
+			width: 85px;
+		}
+		&:hover {
+			opacity: 1;
+		}
+	}
+	.registration {
+		text-align: right;
+		.btn-custom-success,
+		.btn-custom-primary {
+			margin-right: 3px;
+			font-weight: bold;
+			font-size: 14px;
+		}
+		.btn-custom-success {
+			background: linear-gradient(to bottom, #61bd4f 0%, #5aac44 100%);
+			&:hover {
+				background: linear-gradient(
+					to bottom,
+					#5aac44 0%,
+					#519839 100%
+				);
+			}
+		}
+		.btn-custom-primary {
+			background: linear-gradient(
+				to bottom,
+				rgba(255, 255, 255, 0.3),
+				rgba(255, 255, 255, 0.2)
+			);
+			margin-right: 0px;
+			&:hover {
+				background: linear-gradient(
+					to bottom,
+					rgba(255, 255, 255, 0.2),
+					rgba(255, 255, 255, 0.1)
+				);
+			}
+		}
+	}
+}

@@ -13,6 +13,9 @@ import { Col, Container, Row } from "react-bootstrap";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Board from "../components/Board";
 import shortid from "shortid";
+import NavBar from "../components/NavBar";
+import SignUpForFree from "../components/SignUpForFree";
+import KanBanMenu from "../components/KanBanMenu";
 const DEBUG = true;
 
 export const getServerSideProps = reduxWrapper.getServerSideProps(
@@ -96,6 +99,7 @@ export default function ThingsPage() {
 
 	useEffect(() => {
 		if (!loaded) reload();
+		if (myState?.board?.lists?.length > 0) return;
 		seed();
 	}, []);
 
@@ -103,115 +107,21 @@ export default function ThingsPage() {
 		console.log("myState", myState);
 	}, [myState]); */
 
-	const randomThingAdd = () => {
-		dispatch(
-			thingAdd({
-				word: "wee",
-				pronounciation: "wfoe",
-				definition: "asdfma",
-			})
-		);
-	};
-
-	const reorder = (list, startIndex, endIndex) => {
-		const result = Array.from(list);
-		const [removed] = result.splice(startIndex, 1);
-		result.splice(endIndex, 0, removed);
-
-		return result;
-	};
-
-	const onDragEnd = (result) => {
-		// dropped outside the list
-		if (!result.destination) {
-			return;
-		}
-
-		const itemsReordered: any = reorder(
-			items,
-			result.source.index,
-			result.destination.index
-		);
-
-		setItems(itemsReordered);
-	};
-
-	const grid = 8;
-
-	const getItemStyle = (isDragging, draggableStyle) => ({
-		// some basic styles to make the items look a bit nicer
-		userSelect: "none",
-		padding: grid * 2,
-		margin: `0 ${grid}px 0 0`,
-
-		// change background colour if dragging
-		background: isDragging ? "lightgreen" : "grey",
-
-		// styles we need to apply on draggables
-		...draggableStyle,
-	});
-
-	const getListStyle = (isDraggingOver) => ({
-		background: isDraggingOver ? "lightblue" : "lightgrey",
-		display: "flex",
-		padding: grid,
-		overflow: "auto",
-	});
-
 	return (
-		<Container fluid>
-			<Row>
-				<Col xs={12}>
-					1 of 1<h1 className="text-2xl font-bold mb-4">Things</h1>
-					<Board />
-				</Col>
-				{/* <Col>
-							<DragDropContext onDragEnd={onDragEnd}>
-								<Droppable
-									droppableId="droppable"
-									direction="horizontal"
-								>
-									{(provided, snapshot) => (
-										<div
-											ref={provided.innerRef}
-											style={getListStyle(
-												snapshot.isDraggingOver
-											)}
-											{...provided.droppableProps}
-										>
-											{items.map((item, index) => (
-												<Draggable
-													key={item.id}
-													draggableId={item.id}
-													index={index}
-												>
-													{(provided, snapshot) => (
-														<div
-															ref={
-																provided.innerRef
-															}
-															{...provided.draggableProps}
-															{...provided.dragHandleProps}
-															style={getItemStyle(
-																snapshot.isDragging,
-																provided
-																	.draggableProps
-																	.style
-															)}
-														>
-															{item.content}
-														</div>
-													)}
-												</Draggable>
-											))}
-											{provided.placeholder}
-										</div>
-									)}
-								</Droppable>
-							</DragDropContext>
-						</Col> */}
-			</Row>
-		</Container>
+		<>
+			<NavBar />
+			<SignUpForFree />
+			<Container fluid>
+				<Row>
+					<Col xs={12}>
+						<KanBanMenu />
+					</Col>
+					<Col xs={12}>
+						<Board />
+					</Col>
+				</Row>
+			</Container>
+		</>
 	);
 }
 

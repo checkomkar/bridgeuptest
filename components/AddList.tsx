@@ -24,12 +24,14 @@ function AddList({ toggleAddingList }) {
 				onClickOutside={toggleAddingList}
 				saveList={createList}
 				deleteList={undefined}
+				list={undefined}
 			/>
 
 			<EditButtons
 				handleSave={createList}
 				saveLabel={"Add list"}
 				handleCancel={toggleAddingList}
+				handleDelete={undefined}
 			/>
 		</div>
 	);

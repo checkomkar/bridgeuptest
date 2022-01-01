@@ -7,6 +7,7 @@ import shortid from "shortid";
 import * as actions from "../store/actions";
 import List from "./List";
 import AddList from "./AddList";
+import BoardStyled from "../styled-components/BoardStyled";
 function Board(props) {
 	const styles = {
 		board: { height: "92%", display: "flex", overflowX: "auto" },
@@ -63,40 +64,48 @@ function Board(props) {
 	}, [board]);
 
 	return (
-		<DragDropContext onDragEnd={handleDragEnd}>
-			<Droppable droppableId="board" direction="horizontal" type="COLUMN">
-				{(provided, _snapshot) => (
-					<div className="Board" ref={provided.innerRef}>
-						{board?.lists.map((listId, index) => {
-							return (
-								<>
-									<List
-										listId={listId}
-										key={listId}
-										index={index}
+		<BoardStyled>
+			<DragDropContext onDragEnd={handleDragEnd}>
+				<Droppable
+					droppableId="board"
+					direction="horizontal"
+					type="COLUMN"
+				>
+					{(provided, _snapshot) => (
+						<div className="Board" ref={provided.innerRef}>
+							{board?.lists.map((listId, index) => {
+								return (
+									<>
+										<List
+											listId={listId}
+											key={listId}
+											index={index}
+										/>
+									</>
+								);
+							})}
+
+							{provided.placeholder}
+
+							<div className="Add-List">
+								{addingList ? (
+									<AddList
+										toggleAddingList={toggleAddingList}
 									/>
-								</>
-							);
-						})}
-
-						{provided.placeholder}
-
-						<div className="Add-List">
-							{addingList ? (
-								<AddList toggleAddingList={toggleAddingList} />
-							) : (
-								<div
-									onClick={toggleAddingList}
-									className="Add-List-Button"
-								>
-									+ Add a list
-								</div>
-							)}
+								) : (
+									<div
+										onClick={toggleAddingList}
+										className="Add-List-Button"
+									>
+										+ Add a list
+									</div>
+								)}
+							</div>
 						</div>
-					</div>
-				)}
-			</Droppable>
-		</DragDropContext>
+					)}
+				</Droppable>
+			</DragDropContext>
+		</BoardStyled>
 	);
 }
 
