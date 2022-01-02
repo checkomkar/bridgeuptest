@@ -87,8 +87,10 @@ const listsById = (state = {}, action) => {
 		}
 		case actions.deleteList: {
 			const { listId } = action.payload;
-			const { [listId]: deletedList, ...restOfLists } = state;
-			return restOfLists;
+			//const { [listId]: deletedList, ...restOfLists } = state;
+			let newState = { ...state };
+			delete newState[listId];
+			return newState;
 		}
 		case actions.addCard: {
 			const { listId, cardId } = action.payload;
@@ -175,8 +177,10 @@ const cardsById = (state = {}, action) => {
 		}
 		case actions.deleteCard: {
 			const { cardId } = action.payload;
-			const { [cardId]: deletedCard, ...restOfCards } = state;
-			return restOfCards;
+			//const { [cardId]: deletedCard, ...restOfCards } = state;
+			let newState = { ...state };
+			delete newState[cardId];
+			return newState;
 		}
 		// Find every card from the deleted list and remove it
 		case actions.deleteList: {
