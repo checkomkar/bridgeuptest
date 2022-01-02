@@ -18,7 +18,7 @@ import SignUpForFree from "../components/SignUpForFree";
 import KanBanMenu from "../components/KanBanMenu";
 const DEBUG = true;
 
-export const getServerSideProps = reduxWrapper.getServerSideProps(
+/* export const getServerSideProps = reduxWrapper.getServerSideProps(
 	async ({ store, query }) => {
 		if (query.preload) {
 			log.info("preloading?");
@@ -27,7 +27,7 @@ export const getServerSideProps = reduxWrapper.getServerSideProps(
 			await store.sagaTask.toPromise();
 		}
 	}
-);
+); */
 
 export default function ThingsPage() {
 	const { loading, loaded, adding, things, error } = useSelector(
@@ -42,7 +42,7 @@ export default function ThingsPage() {
 		}));
 	const dispatch = useDispatch();
 	const [items, setItems] = useState(getItems(6));
-	const reload = () => dispatch(thingsLoad());
+	//const reload = () => dispatch(thingsLoad());
 
 	const seed = () => {
 		const firstListId = shortid.generate();
@@ -144,7 +144,7 @@ export default function ThingsPage() {
 	};
 
 	useEffect(() => {
-		if (!loaded) reload();
+		//if (!loaded) reload();
 		if (myState?.board?.lists?.length > 0) return;
 		seed();
 	}, []);
