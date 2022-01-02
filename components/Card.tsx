@@ -4,6 +4,10 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import CardEditor from "./CardEditor";
 import { TiEdit } from "react-icons/ti";
+import { FaRegComment } from "react-icons/fa";
+import { IoMdCheckboxOutline } from "react-icons/io";
+import { BiLike } from "react-icons/bi";
+import styles from "./styles/Card.module.scss";
 function Card(props) {
 	const dispatch = useDispatch();
 	const { cardsById } = useSelector((state: any) => state);
@@ -43,6 +47,7 @@ function Card(props) {
 			});
 		}
 	};
+
 	if (!editing) {
 		return (
 			<Draggable draggableId={card._id} index={index}>
@@ -65,8 +70,44 @@ function Card(props) {
 								</div>
 							</div>
 						)}
-						<div className="Card-Status"></div>
+						<div
+							className={`Card-Status ${
+								card.status && card.status == "red" ? "red" : ""
+							}`}
+						></div>
 						{card.text}
+						<div className={styles["card-activities"]}>
+							{card.commentCount && (
+								<div className={styles["activity"]}>
+									<div className={styles["activity-icon"]}>
+										<FaRegComment />
+									</div>
+									<div className={styles["activity-content"]}>
+										{card.commentCount}
+									</div>
+								</div>
+							)}
+							{card.taskCount && (
+								<div className={styles["activity"]}>
+									<div className={styles["activity-icon"]}>
+										<IoMdCheckboxOutline />
+									</div>
+									<div className={styles["activity-content"]}>
+										{`${card.completedTaskCount}/${card.taskCount}`}
+									</div>
+								</div>
+							)}
+							{card.likeCount && (
+								<div className={styles["activity"]}>
+									<div className={styles["activity-icon"]}>
+										<BiLike />
+									</div>
+									<div className={styles["activity-content"]}>
+										{card.likeCount}
+									</div>
+								</div>
+							)}
+						</div>
 					</div>
 				)}
 			</Draggable>

@@ -145,8 +145,29 @@ const listsById = (state = {}, action) => {
 const cardsById = (state = {}, action) => {
 	switch (action.type) {
 		case actions.addCard: {
-			const { cardText, cardId } = action.payload;
-			return { ...state, [cardId]: { text: cardText, _id: cardId } };
+			const {
+				cardText,
+				cardId,
+				commentCount,
+				completedTaskCount,
+				taskCount,
+				likeCount,
+				status,
+			} = action.payload;
+			return {
+				...state,
+				[cardId]: {
+					text: cardText,
+					_id: cardId,
+					commentCount: commentCount ? commentCount : null,
+					taskCount: taskCount ? taskCount : null,
+					completedTaskCount: completedTaskCount
+						? completedTaskCount
+						: null,
+					likeCount: likeCount ? likeCount : null,
+					status: status ? status : null,
+				},
+			};
 		}
 		case actions.changeCardText: {
 			const { cardText, cardId } = action.payload;
