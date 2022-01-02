@@ -14,7 +14,7 @@ const BoardStyled = styled.div`
 
 	.Add-List-Button {
 		background-color: rgba(0, 0, 0, 0.12);
-		border-radius: 10px;
+		border-radius: 3px;
 		cursor: pointer;
 		color: #fff;
 		display: flex;

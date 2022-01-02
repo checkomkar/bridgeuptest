@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col } from "react-bootstrap";
+import SideMenu from "./SideMenu";
 import styles from "./styles/NavBar.module.scss";
 function NavBar() {
+	const [showMenu, setShowMenu] = useState(false);
+	const closeMenu = () => setShowMenu(false);
 	return (
 		<>
 			<div className={styles["nav-bar"]}>
@@ -30,6 +33,7 @@ function NavBar() {
 						Log in
 					</a>
 				</Col>
+				<SideMenu closeMenu={closeMenu} showMenu={showMenu} />
 			</div>
 		</>
 	);

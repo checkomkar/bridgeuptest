@@ -1,0 +1,145 @@
+.side-menu {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 340px;
+	height: 100%;
+	background-color: #fff;
+	z-index: 100;
+	transform: translateX(100%);
+	transition: transform 0.3s ease-in-out;
+	color: #1b2e4e;
+	padding: 0 10px;
+	margin: 0 5px;
+	&.open {
+		transform: translateX(0);
+	}
+	.side-menu__header {
+		height: 48px;
+		padding: 10px 6px 0 12px;
+		position: relative;
+		transition: opacity 0.2s ease-in;
+		width: 100%;
+		text-align: center;
+		font-size: 16px;
+	}
+	.side-menu__header-logo {
+		font-weight: bold;
+		color: #172b4d;
+		opacity: 0.8;
+	}
+	.side-menu__close {
+		position: absolute;
+		top: 0px;
+		right: 0;
+		width: 48px;
+		height: 48px;
+		padding: 0;
+		border: none;
+		background-color: transparent;
+		font-size: 30px;
+		cursor: pointer;
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+	.side-menu__content {
+		overflow-y: auto;
+		height: calc(100% - 48px);
+
+		&::-webkit-scrollbar {
+			width: 5px;
+			background-color: #fff;
+		}
+		&::-webkit-scrollbar-track {
+			background-color: rgb(230, 229, 229);
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: rgb(190, 190, 190);
+			border-radius: 10px;
+		}
+	}
+	div.hr {
+		background-color: #091e4221;
+		border: 0;
+		height: 1px;
+		padding: 0;
+		width: 100%;
+	}
+	.menu-item-container {
+		margin: 10px 5px;
+	}
+	.item {
+		padding: 8px 10px;
+		border-radius: 3px;
+		display: block;
+		font-weight: 600;
+		line-height: 20px;
+		text-decoration: none;
+		.icon,
+		.text {
+			display: inline-block;
+			vertical-align: middle;
+			line-height: 10px;
+			opacity: 0.9;
+		}
+		.icon {
+			margin-right: 10px;
+			width: 7%;
+			.rounded {
+				border-radius: 50%;
+				font-weight: bold;
+				color: #172b4d;
+				background-color: #dfe1e6;
+				padding: 5px;
+				font-size: 14px;
+				position: relative;
+				left: -10px;
+				top: -12px;
+				opacity: 1;
+			}
+		}
+		.text {
+			width: 89%;
+			line-height: 1.2;
+			span.bold {
+				font-weight: bold;
+			}
+			.timestamp {
+				display: block;
+				font-size: 13px;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+			.underline {
+				text-decoration: underline;
+			}
+		}
+		&:hover {
+			background-color: #091e4214;
+			cursor: pointer;
+			.icon,
+			.text {
+				color: #172b4d;
+			}
+		}
+		&.sub-item {
+			.bold {
+				font-size: 14px;
+			}
+			.text {
+				font-size: 14px;
+				line-height: 1.5;
+			}
+			&:hover {
+				background-color: #fff;
+				cursor: pointer;
+				.icon,
+				.text {
+					color: inherit;
+				}
+			}
+		}
+	}
+}

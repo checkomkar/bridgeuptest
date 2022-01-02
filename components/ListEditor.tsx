@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import { MdDeleteOutline } from "react-icons/md";
 function ListEditor({
 	list,
 	title,
@@ -43,7 +44,11 @@ function ListEditor({
 				onKeyDown={onEnter}
 				style={{ width: deleteList !== undefined ? 220 : 245 }}
 			/>
-			{deleteList && <span onClick={deleteList}>Del</span>}
+			{deleteList && (
+				<span onClick={deleteList}>
+					<MdDeleteOutline />
+				</span>
+			)}
 		</div>
 	);
 }

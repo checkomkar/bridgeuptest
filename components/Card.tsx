@@ -3,6 +3,7 @@ import * as actions from "../store/actions";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import CardEditor from "./CardEditor";
+import { TiEdit } from "react-icons/ti";
 function Card(props) {
 	const dispatch = useDispatch();
 	const { cardsById } = useSelector((state: any) => state);
@@ -60,11 +61,11 @@ function Card(props) {
 									className="Card-Icon"
 									onClick={startEditing}
 								>
-									+
+									<TiEdit />
 								</div>
 							</div>
 						)}
-
+						<div className="Card-Status"></div>
 						{card.text}
 					</div>
 				)}

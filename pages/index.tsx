@@ -49,7 +49,7 @@ export default function ThingsPage() {
 
 		dispatch({
 			type: actions.addList,
-			payload: { listId: firstListId, listTitle: "First list" },
+			payload: { listId: firstListId, listTitle: "To Do" },
 		});
 
 		dispatch({
@@ -57,7 +57,10 @@ export default function ThingsPage() {
 			payload: {
 				listId: firstListId,
 				cardId: shortid.generate(),
-				cardText: "First card",
+				cardText: "Helpdesk Call AA999",
+				commentCount: 1,
+				completedTaskCount: 1,
+				taskCount: 3,
 			},
 		});
 
@@ -66,7 +69,7 @@ export default function ThingsPage() {
 			payload: {
 				listId: firstListId,
 				cardId: shortid.generate(),
-				cardText: "Second card",
+				cardText: "Helpdesk Call BB999",
 			},
 		});
 
@@ -75,7 +78,7 @@ export default function ThingsPage() {
 
 		dispatch({
 			type: actions.addList,
-			payload: { listId: secondListId, listTitle: "Second list" },
+			payload: { listId: secondListId, listTitle: "Development" },
 		});
 
 		dispatch({
@@ -83,7 +86,9 @@ export default function ThingsPage() {
 			payload: {
 				listId: secondListId,
 				cardId: shortid.generate(),
-				cardText: "Card 1",
+				cardText: "Help Desk Call CC999",
+				likeCount: 1,
+				status: "red",
 			},
 		});
 
@@ -92,7 +97,48 @@ export default function ThingsPage() {
 			payload: {
 				listId: secondListId,
 				cardId: shortid.generate(),
-				cardText: "Card 2",
+				cardText: "Help Desk Call DD999",
+			},
+		});
+
+		const thirdListId = shortid.generate();
+
+		dispatch({
+			type: actions.addList,
+			payload: { listId: thirdListId, listTitle: "Testing" },
+		});
+		dispatch({
+			type: actions.addCard,
+			payload: {
+				listId: thirdListId,
+				cardId: shortid.generate(),
+				cardText: "Help Desk Call EE999",
+				status: "red",
+			},
+		});
+
+		const fourthListId = shortid.generate();
+
+		dispatch({
+			type: actions.addList,
+			payload: { listId: fourthListId, listTitle: "Done" },
+		});
+		dispatch({
+			type: actions.addCard,
+			payload: {
+				listId: fourthListId,
+				cardId: shortid.generate(),
+				cardText: "Help Desk Call FF999",
+				status: "blue",
+			},
+		});
+		dispatch({
+			type: actions.addCard,
+			payload: {
+				listId: fourthListId,
+				cardId: shortid.generate(),
+				cardText: "Help Desk Call GG999",
+				status: "red",
 			},
 		});
 	};
