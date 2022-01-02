@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\nimport styles from \"./styles/Pipe.module.scss\";\n\nfunction Pipe() {\n  return __jsx(\"div\", {\n    className: styles.pipe\n  });\n}\n\nexport default Pipe;","map":null,"metadata":{},"sourceType":"module"}

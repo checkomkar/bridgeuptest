@@ -1,1 +1,0 @@
-{"ast":null,"code":"const initialState = {\n  things_page: {\n    loading: false,\n    loaded: false,\n    adding: false,\n    things: null,\n    error: null\n  }\n};\nexport default initialState;","map":null,"metadata":{},"sourceType":"module"}
