@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { MdDeleteOutline } from "react-icons/md";
+import styles from "./styles/ListEditor.module.scss";
 function ListEditor({
 	list,
 	title,
@@ -34,10 +35,10 @@ function ListEditor({
 		onClickOutside();
 	};
 	return (
-		<div className="List-Title-Edit" ref={ref}>
+		<div className={styles["list-title-edit"]} ref={ref}>
 			<TextareaAutosize
 				autoFocus
-				className="List-Title-Textarea"
+				className={styles["list-title-textarea"]}
 				placeholder="Enter list title..."
 				value={title}
 				onChange={handleChangeTitle}

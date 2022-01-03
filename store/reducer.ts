@@ -245,6 +245,7 @@ const store = createStore(combinedReducer, persistedState);
 
 store.subscribe(
 	throttle(() => {
+		console.log("store changed");
 		saveState(store.getState());
 	}, 1000)
 );

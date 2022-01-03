@@ -3,13 +3,7 @@ import { useEffect } from "react";
 import { reduxWrapper } from "../store/wrapper";
 import "bootstrap/dist/css/bootstrap.css";
 // import '../styles/tailwind.css'
-import "../styles/Board.css";
-import "../styles/List.css";
-import "../styles/Card.css";
-import "../styles/AddList.css";
-import "../styles/ListEditor.css";
-import "../styles/EditButtons.css";
-import "../styles/CardEditor.css";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
 	useEffect(() => {
@@ -25,7 +19,7 @@ function MyApp({ Component, pageProps }) {
 	return (
 		<>
 			<Head>
-				<title>Spro's Next.js Boilerplate</title>
+				<title>Bridge Up Test</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Component {...pageProps} />

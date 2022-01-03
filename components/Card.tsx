@@ -56,14 +56,14 @@ function Card(props) {
 						ref={provided.innerRef}
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}
-						className="Card"
+						className={styles["card"]}
 						onMouseEnter={startHover}
 						onMouseLeave={endHover}
 					>
 						{hover && (
-							<div className="Card-Icons">
+							<div className={styles["card-icons"]}>
 								<div
-									className="Card-Icon"
+									className={styles["card-icon"]}
 									onClick={startEditing}
 								>
 									<TiEdit />
@@ -71,8 +71,10 @@ function Card(props) {
 							</div>
 						)}
 						<div
-							className={`Card-Status ${
-								card.status && card.status == "red" ? "red" : ""
+							className={`${styles["card-status"]} ${
+								card.status && card.status == "red"
+									? styles["red"]
+									: ""
 							}`}
 						></div>
 						{card.text}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import EditButtons from "./EditButtons";
+import styles from "./styles/CardEditor.module.scss";
 function CardEditor(props) {
 	const { text, onSave, onDelete, onCancel, adding } = props;
 	const [textState, setTextState] = useState(text);
@@ -13,11 +14,11 @@ function CardEditor(props) {
 		}
 	};
 	return (
-		<div className="Edit-Card">
-			<div className="Card">
+		<div className={styles["edit-card"]}>
+			<div className={styles["card"]}>
 				<TextareaAutosize
 					autoFocus
-					className="Edit-Card-Textarea"
+					className={styles["edit-card-textarea"]}
 					placeholder="Enter the text for this card..."
 					value={textState}
 					onChange={handleChangeText}

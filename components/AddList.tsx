@@ -4,6 +4,7 @@ import shortid from "shortid";
 import EditButtons from "./EditButtons";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../store/actions";
+import styles from "./styles/Board.module.scss";
 function AddList({ toggleAddingList }) {
 	const dispatch = useDispatch();
 	const [title, setTitle] = useState("");

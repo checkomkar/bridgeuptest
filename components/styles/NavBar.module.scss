@@ -3,8 +3,10 @@
 	box-sizing: border-box;
 	display: flex;
 	max-height: 40px;
-	overflow: hidden;
 	padding: 4px 4px;
+	position: relative;
+	width: 100%;
+	display: block;
 	.menu-item {
 		color: white;
 		font-weight: bold;
@@ -30,6 +32,66 @@
 			}
 		}
 	}
+
+	.mobile-menu {
+		position: absolute;
+		left: 10px;
+		top: 0;
+		z-index: 3;
+		.mobile-menu-icon {
+			color: white;
+			font-size: 28px;
+		}
+		.dropdown-menu {
+			display: none;
+			position: absolute;
+			background: white;
+			border-radius: 3px;
+			box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+			padding: 10px;
+			width: 150px;
+			ul {
+				padding: 0;
+				margin: 0;
+				li {
+					list-style: none;
+					border-bottom: 1px solid #ddd;
+					padding: 5px;
+					a {
+						display: inline-block;
+						width: 100%;
+						text-decoration: none;
+						color: #333;
+						padding: 0px 10px;
+						&.btn-custom-success,
+						&.btn-custom-primary {
+							color: white !important;
+						}
+					}
+				}
+			}
+			.btn-custom-primary {
+				background: linear-gradient(
+					to bottom,
+					rgba(28, 103, 173, 0.9),
+					rgba(41, 147, 218, 0.9)
+				);
+				margin-right: 0px;
+				&:hover {
+					background: linear-gradient(
+						to bottom,
+						rgba(33, 143, 247, 0.9),
+						rgba(24, 79, 131, 0.9)
+					);
+				}
+			}
+
+			&.show {
+				display: block;
+			}
+		}
+	}
+
 	.logo {
 		text-align: center;
 		opacity: 0.5;
@@ -45,36 +107,32 @@
 	}
 	.registration {
 		text-align: right;
-		.btn-custom-success,
-		.btn-custom-primary {
-			margin-right: 3px;
-			font-weight: bold;
-			font-size: 14px;
+	}
+	.btn-custom-success,
+	.btn-custom-primary {
+		margin-right: 3px;
+		font-weight: bold;
+		font-size: 14px;
+	}
+	.btn-custom-success {
+		background: linear-gradient(to bottom, #61bd4f 0%, #5aac44 100%);
+		&:hover {
+			background: linear-gradient(to bottom, #5aac44 0%, #519839 100%);
 		}
-		.btn-custom-success {
-			background: linear-gradient(to bottom, #61bd4f 0%, #5aac44 100%);
-			&:hover {
-				background: linear-gradient(
-					to bottom,
-					#5aac44 0%,
-					#519839 100%
-				);
-			}
-		}
-		.btn-custom-primary {
+	}
+	.btn-custom-primary {
+		background: linear-gradient(
+			to bottom,
+			rgba(255, 255, 255, 0.3),
+			rgba(255, 255, 255, 0.2)
+		);
+		margin-right: 0px;
+		&:hover {
 			background: linear-gradient(
 				to bottom,
-				rgba(255, 255, 255, 0.3),
-				rgba(255, 255, 255, 0.2)
+				rgba(255, 255, 255, 0.2),
+				rgba(255, 255, 255, 0.1)
 			);
-			margin-right: 0px;
-			&:hover {
-				background: linear-gradient(
-					to bottom,
-					rgba(255, 255, 255, 0.2),
-					rgba(255, 255, 255, 0.1)
-				);
-			}
 		}
 	}
 }

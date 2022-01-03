@@ -7,7 +7,7 @@ import CardEditor from "./CardEditor";
 import ListEditor from "./ListEditor";
 import { useSelector, useDispatch } from "react-redux";
 import shortid from "shortid";
-
+import styles from "./styles/List.module.scss";
 export default function List(props) {
 	const dispatch = useDispatch();
 	const { board, cardsById, listsById } = useSelector((state: any) => state);
@@ -63,7 +63,7 @@ export default function List(props) {
 					ref={provided.innerRef}
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
-					className="List"
+					className={styles["list"]}
 				>
 					{editingTitle ? (
 						<ListEditor
@@ -76,7 +76,7 @@ export default function List(props) {
 						/>
 					) : (
 						<div
-							className="List-Title"
+							className={styles["list-title"]}
 							onClick={toggleEditingTitle}
 						>
 							{list.title}
@@ -87,7 +87,7 @@ export default function List(props) {
 						{(provided, _snapshot) => (
 							<div
 								ref={provided.innerRef}
-								className="Lists-Cards"
+								className={styles["lists-cards"]}
 							>
 								{list.cards &&
 									list.cards.map((cardId, index) => (
@@ -109,7 +109,7 @@ export default function List(props) {
 									/>
 								) : (
 									<div
-										className="Toggle-Add-Card"
+										className={styles["toggle-add-card"]}
 										onClick={toggleAddingCard}
 									>
 										+ Add a card
