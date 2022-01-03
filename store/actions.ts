@@ -53,3 +53,5 @@ export const changeListTitle = createAction("CHANGE_LIST_TITLE");
 export const addCard = createAction("ADD_CARD");
 
 export const changeCardText = createAction("CHANGE_CARD_TEXT");
+
+export const setSearchValue = createAction("SET_SEARCH_VALUE");

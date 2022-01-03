@@ -30,10 +30,6 @@ const DEBUG = true;
 ); */
 
 export default function ThingsPage() {
-	const { loading, loaded, adding, things, error } = useSelector(
-		(state: any) => state.things_page
-	);
-
 	const myState = useSelector((state: any) => state);
 	const getItems = (count) =>
 		Array.from({ length: count }, (v, k) => k).map((k) => ({

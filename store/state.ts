@@ -1,13 +1,7 @@
-import {AppState} from './types'
-
-const initialState: AppState = {
-    things_page: {
-        loading: false,
-        loaded: false,
-        adding: false,
-        things: null,
-        error: null
-    }
+import { AppState } from "./types";
+let initialState = {};
+if (localStorage.getItem("state") !== null) {
+	initialState = JSON.parse(localStorage.getItem("state"));
 }
 
-export default initialState
+export default initialState;

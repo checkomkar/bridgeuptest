@@ -35,7 +35,7 @@ function Card(props) {
 
 		dispatch({
 			type: actions.changeCardText,
-			payload: { cardId: card._id, cardText: text },
+			payload: { cardId: card?._id, cardText: text },
 		});
 	};
 
@@ -50,7 +50,7 @@ function Card(props) {
 
 	if (!editing) {
 		return (
-			<Draggable draggableId={card._id} index={index}>
+			<Draggable draggableId={card?._id} index={index}>
 				{(provided, snapshot) => (
 					<div
 						ref={provided.innerRef}
@@ -72,40 +72,40 @@ function Card(props) {
 						)}
 						<div
 							className={`${styles["card-status"]} ${
-								card.status && card.status == "red"
+								card?.status && card?.status == "red"
 									? styles["red"]
 									: ""
 							}`}
 						></div>
-						{card.text}
+						{card?.text}
 						<div className={styles["card-activities"]}>
-							{card.commentCount && (
+							{card?.commentCount && (
 								<div className={styles["activity"]}>
 									<div className={styles["activity-icon"]}>
 										<FaRegComment />
 									</div>
 									<div className={styles["activity-content"]}>
-										{card.commentCount}
+										{card?.commentCount}
 									</div>
 								</div>
 							)}
-							{card.taskCount && (
+							{card?.taskCount && (
 								<div className={styles["activity"]}>
 									<div className={styles["activity-icon"]}>
 										<IoMdCheckboxOutline />
 									</div>
 									<div className={styles["activity-content"]}>
-										{`${card.completedTaskCount}/${card.taskCount}`}
+										{`${card?.completedTaskCount}/${card?.taskCount}`}
 									</div>
 								</div>
 							)}
-							{card.likeCount && (
+							{card?.likeCount && (
 								<div className={styles["activity"]}>
 									<div className={styles["activity-icon"]}>
 										<BiLike />
 									</div>
 									<div className={styles["activity-content"]}>
-										{card.likeCount}
+										{card?.likeCount}
 									</div>
 								</div>
 							)}
@@ -118,7 +118,7 @@ function Card(props) {
 		return (
 			<>
 				<CardEditor
-					text={card.text}
+					text={card?.text}
 					onSave={editCard}
 					onDelete={deleteCard}
 					onCancel={endEditing}

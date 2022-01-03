@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import Pipe from "./Pipe";
 import styles from "./styles/KanBanMenu.module.scss";
+import * as actions from "../store/actions";
 import { GoGlobe } from "react-icons/go";
 import { BsFilter } from "react-icons/bs";
 import { HiDotsHorizontal } from "react-icons/hi";
@@ -64,12 +65,24 @@ function KanBanMenu() {
 		setResultArray(searchResult);
 	};
 
-	const handleSearchClick = (e) => {
+	const handleSearchClick = (e, item) => {
+		console.log("item", search, item);
 		e.preventDefault();
-		setSearch(search);
+		setSearch(item.searchText);
 		setShowFilter(false);
 		// inputRef.current.value = search;
+		dispatch({
+			type: actions.setSearchValue,
+			payload: {
+				searchValue: item,
+				isCard: item.cards ? true : false,
+			},
+		});
 	};
+
+	useEffect(() => {
+		console.log(search);
+	}, [search]);
 
 	return (
 		<>
@@ -111,13 +124,13 @@ function KanBanMenu() {
 					</Row>
 				</Col>
 				<Col md={2} lg={5}>
-					<div className={styles["input-group"]}>
+					{/* <div className={styles["input-group"]}>
 						<input
 							className="form-control py-2 border-right-0 border"
 							type="text"
 							placeholder="Search"
 							id="search-input"
-							onBlur={() => setShowFilter(false)}
+							//onBlur={() => setShowFilter(false)}
 							onChange={handleSearch}
 							value={search}
 						/>
@@ -129,7 +142,12 @@ function KanBanMenu() {
 											return (
 												<li
 													key={index}
-													onClick={handleSearchClick}
+													onClick={(e) =>
+														handleSearchClick(
+															e,
+															item
+														)
+													}
 												>
 													<a href="#">
 														{item.searchText}
@@ -141,7 +159,7 @@ function KanBanMenu() {
 								)}
 							</div>
 						)}
-					</div>
+					</div> */}
 				</Col>
 				<Col md={4} lg={3} xs={12} className={styles["third-col"]}>
 					<Pipe />

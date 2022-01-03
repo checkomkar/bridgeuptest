@@ -10,38 +10,6 @@ import { createStore } from "redux";
 import throttle from "lodash.throttle";
 import seed from "./seed";
 
-const thingsPageReducer = createReducer(initialState.things_page, (builder) => {
-	builder
-		.addCase(actions.thingsLoad, (state, action) => {
-			state.loading = true;
-			state.loaded = false;
-			state.error = null;
-		})
-		.addCase(actions.thingsLoadComplete, (state, action) => {
-			state.loading = false;
-			state.loaded = true;
-			if (action.payload.error) state.error = action.payload.error;
-			else state.things = action.payload.things;
-		})
-		.addCase(actions.thingsLoadError, (state, action) => {
-			state.loading = false;
-			state.loaded = true;
-			state.error = action.payload;
-		})
-
-		.addCase(actions.thingAdd, (state, action) => {
-			state.adding = true;
-		})
-		.addCase(actions.thingAddComplete, (state, action) => {
-			state.adding = false;
-			state.things.unshift(action.payload.thing);
-		})
-		.addCase(actions.thingAddError, (state, action) => {
-			state.adding = false;
-			state.error = action.payload;
-		});
-});
-
 //Board reducer
 const board = (state = { lists: [] }, action: any) => {
 	switch (action.type) {
@@ -62,6 +30,11 @@ const board = (state = { lists: [] }, action: any) => {
 			const newLists = state.lists.filter(filterDeleted);
 			return { lists: newLists };
 		}
+		// case actions.setSearchValue: {
+		// 	const { searchValue } = action.payload;
+		// 	console.log("board by id red", state, searchValue);
+		// 	return state;
+		// }
 		default:
 			return state;
 	}
@@ -137,6 +110,29 @@ const listsById = (state = {}, action) => {
 				},
 			};
 		}
+		case actions.setSearchValue: {
+			const { searchValue, isCard } = action.payload;
+			if (localStorage.getItem("listsById")) {
+				const listsById = JSON.parse(localStorage.getItem("listsById"));
+			}
+			let newState = { ...state };
+			//console.log("list by id red", state, searchValue);
+			if (
+				isCard == false ||
+				searchValue == "" ||
+				searchValue == null ||
+				searchValue == undefined
+			) {
+				return state;
+			}
+			for (let k in newState) {
+				if (newState.hasOwnProperty(k) && k != searchValue._id) {
+					delete newState[k];
+				}
+			}
+			console.log("list by id red", state, newState);
+			return newState == {} ? state : newState;
+		}
 		default:
 			return state;
 	}
@@ -195,6 +191,27 @@ const cardsById = (state = {}, action) => {
 					{}
 				);
 		}
+		case actions.setSearchValue: {
+			const { searchValue, isCard } = action.payload;
+			let newState = { ...state };
+
+			if (
+				isCard ||
+				searchValue == "" ||
+				searchValue == null ||
+				searchValue == undefined
+			) {
+				return state;
+			}
+			//console.log("list by id red", state, searchValue);
+			for (let k in newState) {
+				if (newState.hasOwnProperty(k) && k != searchValue._id) {
+					delete newState[k];
+				}
+			}
+			console.log("cards by id red", state, newState);
+			return newState == {} ? state : newState;
+		}
 		default:
 			return state;
 	}
@@ -204,13 +221,12 @@ const cardsById = (state = {}, action) => {
 // -----------------------------------------------------------------------------
 
 const combinedReducer = combineReducers({
-	things_page: thingsPageReducer,
 	board,
 	listsById,
 	cardsById,
 });
 
-function rootReducer(state: any = initialState, action) {
+function rootReducer(state: any, action) {
 	switch (action.type) {
 		case HYDRATE:
 			return { ...state, ...action.payload };

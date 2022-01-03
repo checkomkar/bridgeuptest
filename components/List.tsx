@@ -11,12 +11,15 @@ import styles from "./styles/List.module.scss";
 export default function List(props) {
 	const dispatch = useDispatch();
 	const { board, cardsById, listsById } = useSelector((state: any) => state);
+	const currState = useSelector((state: any) => state);
 	const { listId, index } = props;
 	const list = listsById[listId];
 	const [editingTitle, setEditingTitle] = useState(false);
-	const [title, setTitle] = useState(list.title);
+	const [title, setTitle] = useState(list?.title);
 	const [addingCard, setAddingCard] = useState(false);
-
+	useEffect(() => {
+		console.log("currState", currState);
+	}, [listsById, board, cardsById, currState]);
 	const toggleAddingCard = () => {
 		setAddingCard(!addingCard);
 	};
@@ -57,7 +60,7 @@ export default function List(props) {
 	};
 
 	return (
-		<Draggable draggableId={list._id} index={index}>
+		<Draggable draggableId={list?._id} index={index}>
 			{(provided, snapshot) => (
 				<div
 					ref={provided.innerRef}
@@ -79,23 +82,23 @@ export default function List(props) {
 							className={styles["list-title"]}
 							onClick={toggleEditingTitle}
 						>
-							{list.title}
+							{list?.title}
 						</div>
 					)}
 
-					<Droppable droppableId={list._id}>
+					<Droppable droppableId={list?._id}>
 						{(provided, _snapshot) => (
 							<div
 								ref={provided.innerRef}
 								className={styles["lists-cards"]}
 							>
-								{list.cards &&
-									list.cards.map((cardId, index) => (
+								{list?.cards &&
+									list?.cards.map((cardId, index) => (
 										<Card
 											key={cardId}
 											cardId={cardId}
 											index={index}
-											listId={list._id}
+											listId={list?._id}
 										/>
 									))}
 
